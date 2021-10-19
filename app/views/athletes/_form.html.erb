@@ -1,0 +1,23 @@
+
+<%= simple_form_for(@athlete) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :nationality %>
+    <%= f.input :sport %>
+    <%= f.input :edition %>
+    <%= f.input :number_of_medals %>
+    <%= f.input :gold %>
+    <%= f.input :silver %>
+    <%= f.input :bronze %>
+    <%= f.input :number_of_paticipations %>
+    <%= f.input :first_participation %>
+    <%= f.input :year_of_birth %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

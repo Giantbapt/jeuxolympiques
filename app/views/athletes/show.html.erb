@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @athlete.name %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @athlete.nationality %>
+</p>
+
+<p>
+  <strong>Sport:</strong>
+  <%= @athlete.sport %>
+</p>
+
+<p>
+  <strong>Edition:</strong>
+  <%= @athlete.edition %>
+</p>
+
+<p>
+  <strong>Number of medals:</strong>
+  <%= @athlete.number_of_medals %>
+</p>
+
+<p>
+  <strong>Gold:</strong>
+  <%= @athlete.gold %>
+</p>
+
+<p>
+  <strong>Silver:</strong>
+  <%= @athlete.silver %>
+</p>
+
+<p>
+  <strong>Bronze:</strong>
+  <%= @athlete.bronze %>
+</p>
+
+<p>
+  <strong>Number of paticipations:</strong>
+  <%= @athlete.number_of_paticipations %>
+</p>
+
+<p>
+  <strong>First participation:</strong>
+  <%= @athlete.first_participation %>
+</p>
+
+<p>
+  <strong>Year of birth:</strong>
+  <%= @athlete.year_of_birth %>
+</p>
+
+<%= link_to 'Edit', edit_athlete_path(@athlete) %> |
+<%= link_to 'Back', athletes_path %>
