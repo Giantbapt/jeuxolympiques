@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+jon = Athlete.new(name: "baptiste")
+jon.save
+
+edition = Edition.new(name: "Tokyo")
+edition.save
+
+puts "#{jon.name} is saved !"
+puts "#{edition.name} is saved !"

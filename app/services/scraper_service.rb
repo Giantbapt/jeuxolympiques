@@ -7,44 +7,81 @@ require 'selenium-webdriver'
 
 
 
-class Scraper
+class AthletesScraper < ActiveRecord::Base
+
   def initialize
     @driver = Selenium::WebDriver.for :chrome
+
   end
 
-  def scrape_athletes
-  base_url = "sydney_olympics.html"
-
-  html = open(base_url)
-
-  doc = Nokogiri::HTML(html)
-
-  athletes = doc.css('[data-cy= "athlete-row"]')
-  # athletes = doc.search('.styles__AthleteRow-sc-1cwgvzp-0')
-  binding.pry
+  def moreButtonsTimes(x)
+    moreButton = browser.button(xpath: '//*[@id="__next"]/section/section[4]/section/div[2]/button')
+    x.times { browser.execute_script("arguments[0].click();", moreButton) }
   end
+
 
   def scrape_athletes_watir
     base_url = "https://olympics.com/fr/olympic-games/tokyo-2020/athletes"
-    #base_url = "jo.html"
 
     browser = Watir::Browser.new
     browser.goto('https://olympics.com/fr/olympic-games/tokyo-2020/athletes')
 
-    userName = browser.button(xpath: '//*[@id="__next"]/section/section[4]/section/div[2]/button')
-    10.times { browser.execute_script("arguments[0].click();", userName) }
-
-
+    # Pour décider du nombre de noms scrappés
+    #moreButtonsTimes(3)
+    # userName = browser.button(xpath: '//*[@id="__next"]/section/section[4]/section/div[2]/button')
+    # 10.times { browser.execute_script("arguments[0].click();", userName) }
 
     doc = Nokogiri::HTML.parse(browser.html)
 
     scraped_athletes = doc.css('[data-cy="athlete-row"]')
     athletes_names = []
+    athletes_names = []
+    athletes_countries = []
+    athletes_images_names = []
+    athletes_sport = []
+
+    # Initialisation de la variable d'édition
+    edition = "Tokyo"
+
+    # I guess it should be a hash
+    athletes_medals = []
+    athletes_images_names = []
+    athlete_editions = []
+
+    # Création des instances d'Athlète
 
     scraped_athletes.each do |athlete|
-      athletes_names << athlete.children.css('[data-cy="athlete-name"]').children.text
+      athlete_country = athlete.children.css('[data-cy="country"]').children.text
+      athletes_countries <<    athlete_country
+
+      athlete_name = athlete.children.css('[data-cy="athlete-name"]').children.text
+      athletes_names << athlete_name
+
+
+      #athletes_images_names << athlete.children.css('[data-cy="athlete-image-name"]').css('[alt="#{athlete_name}"]').first.attributes.values[-1].value
+
+      athlete_sport = athlete.children.css('[data-cy="sport"]').children.text
+      athletes_sport << athlete_sport
+
+      athlete_gold_medals = athlete.children.css('[title="Or"]').children.text.to_i
+      athlete_silver_medals = athlete.children.css('[title="Silver"]').children.text.to_i
+      athlete_bronze_medals = athlete.children.css('[title="Bronze"]').children.text.to_i
+
+      athlete_medals = []
+      athlete_medals << athlete_gold_medals
+      athlete_medals << athlete_silver_medals
+      athlete_medals << athlete_bronze_medals
+      athletes_medals = athlete_medals
+
+      # athlete_edition = edition
+      # athlete_editions << athlete_edition
+
+      ath = Athlete.new(name: athlete_name, nationality: athlete_nationality, sport: athlete_sport, edition: edition, number_of_medals: number_of_medals, gold: athlete_gold_medals, silver: athlete_silver_medals, bronze: athlete_bronze_medals)
+      ath = Athlete.new(name: athlete_name)
+      ath.save
+       puts "#{ath.name} saved!"
     end
-    binding.pry
+     binding.pry
   end
 
 
@@ -139,7 +176,8 @@ class Scraper
     end
 end
 
-scrape = Scraper.new
+
+scrape = AthletesScraper.new
 
 #scrape.scrape_athletes
 scrape.scrape_athletes_watir.crawl!
