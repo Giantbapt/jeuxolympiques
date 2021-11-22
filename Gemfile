@@ -34,10 +34,10 @@ gem 'simple_form'
 gem 'nokogiri'
 gem 'watir'
 #gem 'webdrivers'
-
-group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
+
+group :development, :test do
   gem 'dotenv-rails'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
