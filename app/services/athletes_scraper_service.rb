@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-require 'watir-webdriver'
+require 'watir'
 require 'selenium-webdriver'
 
 require_relative '../models/edition'
@@ -30,7 +30,7 @@ class AthletesScraperService
     all_editions = Edition.all
     all_editions.each do |item|
       #base_url = "https://olympics.com/fr/olympic-games/tokyo-2020/athletes"
-      browser = Watir::Browser.new
+      browser = Watir::Browser.new :chrome, args: %w[--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9222]
       #browser.goto('https://olympics.com/fr/olympic-games/tokyo-2020/athletes')
       #binding.pry
       #web_address = 'https://olympics.com/fr/olympic-games/athens-1896/athletes'
