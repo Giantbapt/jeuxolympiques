@@ -1,8 +1,8 @@
-require_relative 'test_scrap.rb'
+require_relative '../../app/services/test_scraper_service'
 
 namespace :scraper do
-  desc "scrape edition"
-  task scrape_test: :environment do
+  desc "scrape jogging plus"
+  task test_scrap: :environment do
     TestScraperService.new.scrape
   end
 end

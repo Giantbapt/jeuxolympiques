@@ -4,8 +4,11 @@ class CreateEditions < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :year
       t.string :place
-      t.string :medals
-      t.string :number_of_athletes
+      t.string :slug
+      t.string :logo
+      t.string :season
+      t.integer :number_of_medals
+      t.integer :number_of_athletes
 
       t.timestamps
     end

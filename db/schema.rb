@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_095617) do
+ActiveRecord::Schema.define(version: 2021_11_22_141912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,16 +18,11 @@ ActiveRecord::Schema.define(version: 2021_11_04_095617) do
   create_table "athletes", force: :cascade do |t|
     t.string "name"
     t.string "nationality"
-    t.string "sport"
-    t.string "editions"
+    t.string "sports", array: true
     t.integer "number_of_medals"
     t.integer "gold"
     t.integer "silver"
     t.integer "bronze"
-    t.integer "number"
-    t.string "number_of_participations"
-    t.date "date_of_birth"
-    t.string "first_participation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -36,10 +31,29 @@ ActiveRecord::Schema.define(version: 2021_11_04_095617) do
     t.string "name"
     t.string "year"
     t.string "place"
-    t.string "medals"
-    t.string "number_of_athletes"
+    t.string "slug"
+    t.string "logo"
+    t.string "season"
+    t.integer "number_of_medals"
+    t.integer "number_of_athletes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "participations", force: :cascade do |t|
+    t.bigint "edition_id"
+    t.bigint "athlete_id"
+    t.string "sport"
+    t.integer "number_of_medals"
+    t.integer "gold"
+    t.integer "silver"
+    t.integer "bronze"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["athlete_id"], name: "index_participations_on_athlete_id"
+    t.index ["edition_id"], name: "index_participations_on_edition_id"
+  end
+
+  add_foreign_key "participations", "athletes"
+  add_foreign_key "participations", "editions"
 end

@@ -1,0 +1,44 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Nationality</th>
+      <th scope="col">Sport</th>
+      <th scope="col">Editions</th>
+      <th scope="col">Number_of_medals</th>
+      <th scope="col">Gold</th>
+      <th scope="col">Silver</th>
+      <th scope="col">Bronze</th>
+      <th scope="col">Number</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% sum = 0%>
+      <% @athletes.each do |athlete| %>
+        <% sum += 1 %>
+        <tr>
+          <th scope="row"><%= sum %></th>
+          <td><%=athlete.name%></td>
+          <td><%=athlete.nationality%></td>
+          <td><%=athlete.sports%></td>
+          <td><%=athlete.editions.first.name%></td>
+          <td><%=athlete.number_of_medals%></td>
+          <td><%=athlete.gold%></td>
+          <td><%=athlete.silver%></td>
+          <td><%=athlete.bronze%></td>
+          <td><%#=athlete.number%></td>
+
+        </tr>
+
+
+
+      <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+

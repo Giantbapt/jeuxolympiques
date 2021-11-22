@@ -33,7 +33,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'nokogiri'
 gem 'watir'
-gem 'webdrivers'
+#gem 'webdrivers'
 
 group :development, :test do
   gem 'pry-byebug'
