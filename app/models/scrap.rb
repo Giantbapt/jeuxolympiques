@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-require 'watir'
+require 'watir-webdriver'
 require 'selenium-webdriver'
 
 
